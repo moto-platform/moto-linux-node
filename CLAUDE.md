@@ -1,5 +1,7 @@
 # CLAUDE.md — moto-linux-node
 
+@.claude/PLATFORM-RULES.md
+
 ## What this repo is
 
 The SDV/HPC layer running on a **Raspberry Pi 5 (8 GB)** (mostly Python, C++ where performance is needed). The signal layer is set up first, and everything else sits on top of it:
