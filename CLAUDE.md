@@ -5,7 +5,7 @@
 ## What this repo is
 
 The SDV/HPC layer running on a **Raspberry Pi 5 (8 GB)** (mostly Python, C++ where performance is needed). The signal layer is set up first, and everything else sits on top of it:
-1. **Kuksa Databroker** (Docker) + **kuksa-can-provider**: listens to both CAN buses (vehicle + platform) in listen-only mode, converts them to VSS using `cl250.dbc` + `platform.dbc` + the VSS overlay (D-004).
+1. **Kuksa Databroker** (Docker) + **kuksa-can-provider**: reads the platform bus (where rt-core republishes vehicle signals, D-021) and converts it to VSS using `platform.dbc` + the VSS overlay (D-004). The vehicle bus may be tapped strictly listen-only for raw logging; the Raspi never polls the ECU.
 2. Applications (each its own process, reading from Kuksa via gRPC): lane departure warning (LDW), combined anomaly model inference, HMI, ride video+telemetry overlay, black-box recorder, node health dashboard, OTA distribution (to MCUs over UDS), offline maps.
 3. Calls `moto-mcp` as a local subprocess/dependency, feeding its result as context to the cloud LLM.
 
